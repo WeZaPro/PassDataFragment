@@ -2,8 +2,12 @@ package com.taweesak.passdatafragment.ui;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -14,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,19 +26,19 @@ import com.taweesak.passdatafragment.DataModel.DataModel;
 import com.taweesak.passdatafragment.R;
 import com.taweesak.passdatafragment.viewModel.MyViewModel;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+import java.io.File;
+import java.util.ArrayList;
+
 public class ButtomFragment extends Fragment {
 
     Context context;
-    TextView textViewGetValue,textViewShowCal;
+    TextView textViewShowCal;
     EditText editTextInput;
     Button btnCalValue;
     MyViewModel myViewModel;
-    String key;
-    double keyToDouble;
-
+    //String key;
+    //double keyToDouble;
+    ImageView imageViewFlag;
 
     public ButtomFragment() {
         // Required empty public constructor
@@ -44,11 +49,8 @@ public class ButtomFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
-
-        key = getArguments().getString("Text");
-        keyToDouble = Double.parseDouble(key);
-        //Toast.makeText(getActivity(),"Get bundle is "+key,Toast.LENGTH_SHORT).show();
-
+        /*key = getArguments().getString("Text");
+        keyToDouble = Double.parseDouble(key);*/
     }
 
     @Override
@@ -58,8 +60,6 @@ public class ButtomFragment extends Fragment {
         View view =inflater.inflate(R.layout.fragment_buttom, container, false);
 
         findView(view);
-        textViewGetValue.setText(""+keyToDouble);
-
 
         btnCalValue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,27 +68,35 @@ public class ButtomFragment extends Fragment {
                 myViewModel.getmRates().observe(getActivity(), new Observer<DataModel>() {
                     @Override
                     public void onChanged(DataModel dataModel) {
-                        double x = keyToDouble;
+                        /*double x = keyToDouble;*/
                         double y = Double.parseDouble(editTextInput.getText().toString());
-                        //textViewShowCal.setText(""+dataModel.getRates());
-                        textViewShowCal.setText(""+(x*y));
-
+                        double z = dataModel.getRates();
+                        Toast.makeText(getActivity(),"data change z = "+z,Toast.LENGTH_SHORT).show();
+                        //textViewShowCal.setText(""+(x*y));
+                        textViewShowCal.setText(""+(z*y));
                     }
                 });
-
-                //Toast.makeText(getActivity(),"data get from bundle is ",Toast.LENGTH_SHORT).show();
             }
         });
-
-
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        myViewModel.getmRates().observe(getActivity(), new Observer<DataModel>() {
+            @Override
+            public void onChanged(DataModel dataModel) {
+                imageViewFlag.setImageResource(dataModel.getImageFlag());
+            }
+        });
+    }
+
     private void findView(View view) {
-        textViewGetValue = view.findViewById(R.id.textViewGetValue);
         textViewShowCal = view.findViewById(R.id.textViewShowCal);
         editTextInput = view.findViewById(R.id.editTextInput);
         btnCalValue = view.findViewById(R.id.btnCalValue);
+        imageViewFlag = view.findViewById(R.id.imageViewFlag);
     }
-
 }

@@ -4,6 +4,7 @@ public class DataModel {
     double rates;
     String country;
     boolean isPromo,isChecked;
+    int imageFlag;
 
     public DataModel(double rates) {
         this.rates = rates;
@@ -12,6 +13,12 @@ public class DataModel {
     public DataModel(String country, double rates ) {
         this.country = country;
         this.rates = rates;
+    }
+
+    public DataModel(String country, double rates,int imageFlag ) {
+        this.country = country;
+        this.rates = rates;
+        this.imageFlag = imageFlag;
     }
 
     public double getRates() {
@@ -44,5 +51,13 @@ public class DataModel {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public int getImageFlag() {
+        return imageFlag;
+    }
+
+    public void setImageFlag(int imageFlag) {
+        this.imageFlag = imageFlag;
     }
 }

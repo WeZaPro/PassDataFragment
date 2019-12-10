@@ -3,21 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ButtomFragment">
+    tools:context=".ui.ButtomFragment"
+    android:background="#D5DBDB">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F4F8D0"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
 
-        <TextView
+        <!--<TextView
             android:id="@+id/textViewGetValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:hint="get value"
-            android:textSize="25sp" />
+            android:textSize="25sp" />-->
+
+        <ImageView
+            android:id="@+id/imageViewFlag"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_gravity="center"/>
 
         <EditText
             android:id="@+id/editTextInput"
@@ -32,8 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="click"
-            android:textSize="25sp" />
+            android:text="convert"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/textViewShowCal"

@@ -49,6 +49,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VH>{
 
         DataModel dataModel = listData.get(position);
         holder.textView.setText(""+dataModel.getCountry());
+        holder.imageView.setImageResource(dataModel.getImageFlag());
 
         holder.radioButton.setChecked(dataModel.isChecked());
         holder.itemView.setTag(position);

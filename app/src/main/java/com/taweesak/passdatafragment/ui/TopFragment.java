@@ -40,9 +40,8 @@ public class TopFragment extends Fragment implements itemClickCallBack {
     MyViewModel myViewModel;
     TopFragment topFragment;
     ButtomFragment buttomFragment;
-    /*FragmentManager fragmentManager;*/
+    int fragmentManager;
     FragmentTransaction fragmentTransaction;
-
     Button buttonCalValue;
 
     public TopFragment() {
@@ -76,20 +75,14 @@ public class TopFragment extends Fragment implements itemClickCallBack {
                     public void onChanged(DataModel dataModel) {
 
                         buttomFragment = new ButtomFragment();
-                        Bundle bundle = new Bundle();
+                        /*Bundle bundle = new Bundle();
                         bundle.putString("Text", String.valueOf(dataModel.getRates()));
-                        buttomFragment.setArguments(bundle);
+                        buttomFragment.setArguments(bundle);*/
 
-                        //Toast.makeText(getActivity(),"from button get data is "+bundle,Toast.LENGTH_SHORT).show();
-
-                        /*fragmentManager.beginTransaction()
-                                .replace(R.id.contentContainer_top,buttomFragment)
-                                .commit();*/
-                        int fragmentManager = getActivity().getSupportFragmentManager()
+                        fragmentManager = getActivity().getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.contentContainer_top,buttomFragment)
                                 .commit();
-
                     }
                 });
             }
@@ -101,15 +94,14 @@ public class TopFragment extends Fragment implements itemClickCallBack {
     private void data() {
         String country[] = {"USA","JAPAN","EUROPE"};
         double rates[] = {10,100,1000};
+        int imageFlags[] = {R.drawable.usa,R.drawable.japan,R.drawable.europe};
 
-        //int image[] = {R.drawable.usa,R.drawable.japan,R.drawable.europe};
         int dataSize = country.length;
 
         for (int i = 0; i < dataSize; i++) {
-            DataModel myModelData = new DataModel(country[i],rates[i]);
+            DataModel myModelData = new DataModel(country[i],rates[i],imageFlags[i]);
             mDataList.add(myModelData);
         }
-
     }
 
     private void findView(View view) {
